@@ -4,22 +4,10 @@
  * HINT:
  * It's possible to solve this problem both with and without subqueries.
  */
-
-select distinct title 
-from film 
-join inventory using(film_id) 
-join rental using(inventory_id) 
-join customer using(customer_id) 
-where title in (
-    select title from (
-        select title, count(title) 
-        from film 
-        join inventory using(film_id) 
-        join rental using(inventory_id) 
-        join customer using(customer_id) 
-        where customer_id=1 
-        group by title 
-        having count(title) > 1
-    ) 
-    as t
-);
+select title from film
+join inventory using(film_id)
+join rental using(inventory_id)
+join customer using(customer_id)
+where customer_id=1
+group by title
+having count(film_id)>1;
