@@ -11,3 +11,10 @@
  * For this problem, you should use the NOT IN clause;
  * in problem 05b you will use the LEFT JOIN clause.
  */
+select last_name, first_name 
+from actor 
+where (last_name, first_name) not in (
+    select last_name, first_name 
+    from customer
+) 
+order by last_name, first_name;
